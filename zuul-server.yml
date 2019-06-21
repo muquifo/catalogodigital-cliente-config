@@ -1,0 +1,26 @@
+server:
+  port: 8080
+
+eureka:
+  instance:
+    hostname: localhost
+    port: 9091
+  client:
+    registerWithEureka: true
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka/
+  server:
+    wait-time-in-ms-when-sync-empty: 3000
+
+zuul:
+  routes:
+    users:
+      path: /login/**
+      url: http://localhost:8081
+    pessoa:
+      path: /cliente/**
+      url: http://localhost:8082
+    categories:
+      path: /catalogo/**
+      url: http://localhost:8083
